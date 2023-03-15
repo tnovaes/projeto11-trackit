@@ -40,7 +40,7 @@ export default function LoginPage() {
             .then(res => {
                 setToken(res.data.token);
                 setProfilePic(res.data.image);
-                navigate("/habitos");
+                navigate("/hoje");
             })
             .catch(err => {
                 alert(err.response.data.message);
