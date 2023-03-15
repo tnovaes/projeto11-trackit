@@ -32,7 +32,8 @@ export default function LoginPage() {
 
     function login(e) {
         e.preventDefault();
-        setLoginButton(<ThreeDots color="#FFFFFF"/>)
+        setLoginButton(<ThreeDots color="#FFFFFF"/>);
+        setDisableButton(true);
         setDisableInput(true);
 
         axios.post(`${BASE_URL}/auth/login`, form)
@@ -69,6 +70,7 @@ export default function LoginPage() {
                         name="password"
                         value={form.password}
                         onChange={handleForm}
+                        disabled={disableInput}
                         required>
                     </input>
                     <button data-test="login-btn" type="submit" disabled={disableButton}>{loginButton}</button>

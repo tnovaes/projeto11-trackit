@@ -6,10 +6,13 @@ import axios from "axios";
 import { BASE_URL } from "../assets/constants/urls"
 
 export default function LoginPage() {
+    const navigate = useNavigate();
+
     const [form, setForm] = useState({ email: "", name: "", image: "", password: "" });
+    const [signUpButton, setSignUpButton] = useState("Cadastrar")
     const [disableButton, setDisableButton] = useState(true);
     const [disableInput, setDisableInput] = useState(false);
-    const navigate = useNavigate();
+    
 
     useEffect(() => {
         if (form.email && form.name && form.image && form.password) {
@@ -25,7 +28,9 @@ export default function LoginPage() {
 
     function signUp(e) {
         e.preventDefault();
+        setSignUpButton(<ThreeDots color="#FFFFFF"/>);
         setDisableInput(true);
+        setDisableButton(true);
 
         axios.post(`${BASE_URL}/auth/sign-up`, form)
             .then(res => {
@@ -34,6 +39,7 @@ export default function LoginPage() {
             .catch(err => {
                 alert(err.response.data.message)
                 setDisableInput(false);
+                setSignUpButton("Cadastrar");
             });
     }
 
@@ -82,7 +88,7 @@ export default function LoginPage() {
                         disabled={disableInput}
                         required>
                     </input>
-                    <button data-test="signup-btn" type="submit" disabled={disableButton}>Cadastrar</button>
+                    <button data-test="signup-btn" type="submit" disabled={disableButton}>{signUpButton}</button>
                 </CredentialContainer>
                 <Link to={`/`} data-test="login-link">
                     <LoginCall>
