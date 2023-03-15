@@ -7,14 +7,14 @@ export default function Header() {
     const { profilePic } = useContext(UserDataContext);
 
     return (
-        <NavHeader>
+        <ContainerHeader>
             <Logo src={logo} alt="Logo"></Logo>
             <ProfilePic src={profilePic} alt="Foto de perfil"></ProfilePic>
-        </NavHeader>
+        </ContainerHeader>
     );
 }
 
-const NavHeader = styled.div`
+const ContainerHeader = styled.div`
     width:100vw;
     height: 70px;
     padding:16px;

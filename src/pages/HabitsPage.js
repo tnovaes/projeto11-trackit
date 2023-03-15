@@ -1,12 +1,12 @@
 import styled from "styled-components"
-import Footer from "../assets/components/Footer";
+import Menu from "../assets/components/Menu";
 import Header from "../assets/components/Header";
 
 export default function HabitsPage(){
     return(
         <>
-        <Header></Header>
-        <Footer></Footer>
+        <Header data-test="header"></Header>
+        <Menu data-test="menu"></Menu>
         </>
     );
 }
