@@ -44,6 +44,7 @@ export default function LoginPage() {
             .catch(err => {
                 alert(err.response.data.message);
                 setDisableInput(false);
+                setDisableButton(false);
                 setLoginButton("Entrar");
             });
     }

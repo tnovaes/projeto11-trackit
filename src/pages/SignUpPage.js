@@ -38,8 +38,9 @@ export default function LoginPage() {
                 navigate("/")
             })
             .catch(err => {
-                alert(err.response.data.message)
+                alert(err.response.data.message);
                 setDisableInput(false);
+                setDisableButton(false);
                 setSignUpButton("Cadastrar");
             });
     }
