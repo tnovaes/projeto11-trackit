@@ -4,11 +4,11 @@ import { useNavigate, Link } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { BASE_URL } from "../assets/constants/urls"
-import { TokenContext } from "../assets/contexts/tokenContext";
+import { UserDataContext } from "../assets/contexts/userDataContext";
 import { ThreeDots } from 'react-loader-spinner'
 
 export default function LoginPage() {
-    const { token, setToken } = useContext(TokenContext);
+    const { setToken, setProfilePic } = useContext(UserDataContext);
     const navigate = useNavigate();
 
     const [form, setForm] = useState({ email: "", password: "" });
@@ -39,7 +39,8 @@ export default function LoginPage() {
         axios.post(`${BASE_URL}/auth/login`, form)
             .then(res => {
                 setToken(res.data.token);
-                navigate("/hoje");
+                setProfilePic(res.data.image);
+                navigate("/habitos");
             })
             .catch(err => {
                 alert(err.response.data.message);
@@ -90,10 +91,14 @@ export default function LoginPage() {
 }
 
 const LoginContainer = styled.div`
+    height:100vh;
     display:flex;
     flex-direction: column;
     align-items:center;
-    margin-top:68px;
+    background: #FFFFFF;
+    img {
+        margin-top:68px;
+    }
     
 `
 
@@ -104,9 +109,6 @@ const CredentialContainer = styled.form`
         input{
             width: 303px;
             height: 45px;
-            font-family: 'Lexend Deca';
-            font-style: normal;
-            font-weight: 400;
             font-size: 19.976px;
             line-height: 25px;
             background: #FFFFFF;
@@ -128,9 +130,6 @@ const CredentialContainer = styled.form`
             background: #52B6FF;
             border: none;
             border-radius: 4.63636px;
-            font-family: 'Lexend Deca';
-            font-style: normal;
-            font-weight: 400;
             font-size: 20.976px;
             line-height: 26px;
             text-align: center;
@@ -142,9 +141,6 @@ const CredentialContainer = styled.form`
 
 const SignUpCall = styled.div`
     margin-top:25px;
-    font-family: 'Lexend Deca', sans-serif;
-    font-weight: 400;
-    font-style: normal;
     font-size: 13.976px;
     line-height: 17px;
     text-align: center;

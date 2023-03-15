@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { TokenProvider } from './assets/contexts/tokenContext';
-import ResetStyle from './style/ResetStyle';
+import { UserDataProvider } from './assets/contexts/userDataContext';
+import ResetStyle from './style/ResetStyle.js';
+import GlobalStyle from './style/GlobalStyle.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ResetStyle />
-    <TokenProvider>
+    <GlobalStyle />
+    <UserDataProvider>
       <App />
-    </TokenProvider>
+    </UserDataProvider>
   </React.StrictMode>
 );

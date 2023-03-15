@@ -44,10 +44,5 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
 `
 export default ResetStyle;
