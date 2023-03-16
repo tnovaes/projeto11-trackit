@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import logo from "../images/simple-logo.svg"
 import { UserDataContext } from "../contexts/userDataContext";
 import { useContext } from "react";
 
@@ -8,7 +7,7 @@ export default function Header() {
 
     return (
         <ContainerHeader>
-            <Logo src={logo} alt="Logo"></Logo>
+            <Logo>TrackIt</Logo>
             <ProfilePic src={profilePic} alt="Foto de perfil"></ProfilePic>
         </ContainerHeader>
     );
@@ -17,7 +16,7 @@ export default function Header() {
 const ContainerHeader = styled.div`
     width:100vw;
     height: 70px;
-    padding:16px;
+    padding:0 18px;
     display:flex;
     justify-content: space-between;
     align-items: center;
@@ -30,9 +29,13 @@ const ContainerHeader = styled.div`
     z-index: 1;
 `
 
-const Logo = styled.img`
+const Logo = styled.p`
     width:97px;
     height:49px;
+    font-family: 'Playball';
+    font-size: 39px;
+    line-height: 49px;
+    color:#FFFFFF;
 `
 
 const ProfilePic = styled.img`

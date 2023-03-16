@@ -8,7 +8,7 @@ import { UserDataContext } from "../assets/contexts/userDataContext";
 import { ThreeDots } from 'react-loader-spinner'
 
 export default function LoginPage() {
-    const { setToken, setProfilePic } = useContext(UserDataContext);
+    const { setToken, setProfilePic, setLoginStatus } = useContext(UserDataContext);
     const navigate = useNavigate();
 
     const [form, setForm] = useState({ email: "", password: "" });
@@ -38,6 +38,7 @@ export default function LoginPage() {
 
         axios.post(`${BASE_URL}/auth/login`, form)
             .then(res => {
+                setLoginStatus(true);
                 setToken(res.data.token);
                 setProfilePic(res.data.image);
                 navigate("/hoje");

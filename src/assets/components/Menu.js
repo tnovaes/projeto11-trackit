@@ -48,15 +48,15 @@ const ContainerMenu = styled.div`
     width: 100vw;
     height:70px;
     display:flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     padding: 36px;
     background-color: #FFFFFF;
 
-    position: absolute;
-    bottom:0px;
-    left:0px;
-    z-index: 1;
+    position: fixed;
+    bottom:0;
+    left:0;
+    z-index: 2;
     
     p {
         color:#52B6FF;
@@ -71,10 +71,9 @@ const ContainerMenu = styled.div`
 
 const ProgressCircle = styled.div`
     width:91px;
-    height:91px;
     text-align: center;
     position: relative;
-    bottom:20px;
+    top:-20px;
     p {
         color: #FFFFFF;
         transform: translateY(-20%);

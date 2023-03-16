@@ -135,6 +135,9 @@ const CredentialContainer = styled.form`
             background: #D4D4D4;
         }
         button{
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 303px;
             height: 45px;
             color: #FFFFFF;
