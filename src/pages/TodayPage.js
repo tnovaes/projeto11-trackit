@@ -5,8 +5,8 @@ import Header from "../assets/components/Header";
 export default function TodayPage(){
     return(
         <>
-        <Header data-test="header"></Header>
-        <Menu data-test="menu"></Menu>
+        <Header></Header>
+        <Menu></Menu>
         </>
     );
 }

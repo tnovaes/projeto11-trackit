@@ -5,12 +5,12 @@ import Header from "../assets/components/Header";
 export default function HistoryPage(){
     return(
         <>
-        <Header data-test="header"></Header>
+        <Header></Header>
         <ContainerHistory>
             <h1>Histórico</h1>
             <p>Em breve você poderá ver o histórico dos seus hábitos aqui!</p>
         </ContainerHistory>
-        <Menu data-test="menu"></Menu>
+        <Menu></Menu>
         </>
     );
 }

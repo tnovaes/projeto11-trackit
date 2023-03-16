@@ -81,7 +81,7 @@ export default function HabitsPage() {
 
     return (
         <>
-            <Header data-test="header"></Header>
+            <Header></Header>
             <ContainerPage>
                 <ContainerHabits>
                     <h1>Meus hábitos</h1>
@@ -119,7 +119,7 @@ export default function HabitsPage() {
                 {(habits.length > 0) ? habits.map((h) => <HabitCard key={h.id} card={h} />) :
                     <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>}
             </ContainerPage>
-            <Menu data-test="menu"></Menu>
+            <Menu></Menu>
         </>
     );
 }

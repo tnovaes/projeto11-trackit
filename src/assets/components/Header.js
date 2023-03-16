@@ -6,7 +6,7 @@ export default function Header() {
     const { profilePic } = useContext(UserDataContext);
 
     return (
-        <ContainerHeader>
+        <ContainerHeader data-test="header">
             <Logo>TrackIt</Logo>
             <ProfilePic src={profilePic} alt="Foto de perfil"></ProfilePic>
         </ContainerHeader>
