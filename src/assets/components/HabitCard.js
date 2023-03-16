@@ -24,12 +24,12 @@ export default function HabitCard(props) {
     }
 
     return (
-        <ContainerHabit>
-            <HabitName>{props.card.name}</HabitName>
+        <ContainerHabit data-test="habit-container">
+            <HabitName data-test="habit-name">{props.card.name}</HabitName>
             <ContainerDays>
-                {days.map((d, i) => <Button key={i} id={i} selected={props.card.days.includes(i)}>{d}</Button>)}
+                {days.map((d, i) => <Button data-test="habit-day" key={i} id={i} selected={props.card.days.includes(i)}>{d}</Button>)}
             </ContainerDays>
-            <DeleteButton>
+            <DeleteButton data-test="habit-delete-btn">
                 <TrashOutline
                     color={'#666666'}
                     title="delete"
@@ -79,4 +79,5 @@ const DeleteButton = styled.div`
     position: absolute;
     top: 11px;
     right: 10px;
+    cursor:pointer;
 `;

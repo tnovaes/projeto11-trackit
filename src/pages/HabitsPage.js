@@ -15,6 +15,7 @@ export default function HabitsPage() {
     const [form, setForm] = useState({ name: '', days: [] });
     const [newHabit, setNewHabit] = useState(false);
     const [disableForm, setDisableForm] = useState(false);
+    const [saveButton, setSaveButton] = useState("Salvar");
 
     useEffect(() => {
         const config = {
@@ -38,6 +39,7 @@ export default function HabitsPage() {
         else {
 
             setDisableForm(true);
+            setSaveButton(<ThreeDots color="#FFFFFF" width="45px"/>);
 
             const config = {
                 headers: {
@@ -52,10 +54,12 @@ export default function HabitsPage() {
                     setHabits(newHabits);
                     setNewHabit(false);
                     setDisableForm(false);
+                    setSaveButton("Salvar");
                 })
                 .catch(err => {
                     alert(err.response.data.message);
                     setDisableForm(false);
+                    setSaveButton("Salvar");
                 });
         }
     }
@@ -81,11 +85,12 @@ export default function HabitsPage() {
             <ContainerPage>
                 <ContainerHabits>
                     <h1>Meus hábitos</h1>
-                    <AddButton onClick={() => setNewHabit(!newHabit)}>+</AddButton>
+                    <AddButton data-test="habit-create-btn" onClick={() => setNewHabit(!newHabit)}>+</AddButton>
                 </ContainerHabits>
                 {newHabit && (
-                    <HabitsForm onSubmit={addHabit}>
+                    <HabitsForm data-test="habit-create-container" onSubmit={addHabit}>
                         <input
+                            data-test="habit-name-input"
                             placeholder=" nome do hábito"
                             type="text"
                             name="name"
@@ -96,6 +101,7 @@ export default function HabitsPage() {
                         <ContainerDays>
                             {days.map((d, i) =>
                                 <DaysButton
+                                    data-test="habit-day"
                                     key={i}
                                     id={i}
                                     selected={form.days.includes(i)}
@@ -105,8 +111,8 @@ export default function HabitsPage() {
                                 </DaysButton>)}
                         </ContainerDays>
                         <ContainerButton>
-                            <button type="reset" disabled={disableForm} onClick={() => setNewHabit(!newHabit)}>Cancelar</button>
-                            <button type="submit" disabled={disableForm}>{disableForm ? <ThreeDots color="#FFFFFF" /> : "Salvar"}</button>
+                            <button data-test="habit-create-cancel-btn" type="reset" disabled={disableForm} onClick={() => setNewHabit(!newHabit)}>Cancelar</button>
+                            <SaveButton data-test="habit-create-save-btn" type="submit" disabled={disableForm}>{saveButton}</SaveButton>
                         </ContainerButton>
                     </HabitsForm>
                 )}
@@ -120,6 +126,7 @@ export default function HabitsPage() {
 
 const ContainerPage = styled.div`
     margin-top: 70px;
+    margin-bottom: 110px;
     padding: 0 17px;
     p{
         color: #666666;
@@ -141,15 +148,16 @@ const ContainerHabits = styled.div`
 const AddButton = styled.button`
     width: 40px;
     height: 35px;
-    background-color:#52B6FF;
     color: #FFFFFF;
-    border-radius: 4.7px;
+    padding-bottom: 5px;
+    background-color:#52B6FF;
     border: none;
+    border-radius: 4.7px;
     display: flex;
     justify-content: center;
     align-items: center;  
     font-size: 27px;
-    padding-bottom: 5px;
+    cursor: pointer;
 `;
 
 const HabitsForm = styled.form`
@@ -207,7 +215,8 @@ const DaysButton = styled.div`
     border-radius: 5px;
     margin-right: 4px;
     font-size: 20px;
-    line-height: 25px;  
+    line-height: 25px;
+    cursor:pointer ;
 `;
 
 const ContainerButton = styled.div`
@@ -223,6 +232,7 @@ const ContainerButton = styled.div`
         font-size: 16px;
         line-height: 20px;
         text-align: center;
+        cursor: pointer;
         &:disabled{
             opacity: 0.7;
         }
@@ -233,6 +243,14 @@ const ContainerButton = styled.div`
         margin-right: 10px;
     }
 `;
+
+const SaveButton = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor:pointer;
+`
 
 const LoadingContainer = styled.div`
     width: 100%;
