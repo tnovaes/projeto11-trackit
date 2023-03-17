@@ -51,7 +51,7 @@ export default function TodayHabitCard({ id, name, done, currentSequence, highes
                         </SequenceSpan>
                     </Sequence>
                     <Sequence data-test="today-habit-record">Seu recorde:
-                        <SequenceSpan check={currentSequence === sequence.currentSequence ? sequence.currentSequence !== 0 : false}>
+                        <SequenceSpan check={currentSequence === sequence.currentSequence ? true : false}>
                             {` ${highestSequence} ${highestSequence !== 1 ? "dias" : "dia"}`}</SequenceSpan>
                     </Sequence>
                 </SequenceContainer>
