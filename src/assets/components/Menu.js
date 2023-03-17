@@ -5,7 +5,9 @@ import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-pro
 import { Link } from "react-router-dom";
 
 export default function Menu() {
-    const { progress } = useContext(UserDataContext);
+    const { completedHabits, todayHabits } = useContext(UserDataContext);
+
+    const percentage = Math.floor((completedHabits.length / todayHabits.length) * 100);
 
     return (
         <ContainerMenu data-test="menu">
@@ -17,7 +19,7 @@ export default function Menu() {
             <Link to={`/hoje`} data-test="today-link">
                 <ProgressCircle>
                     <CircularProgressbarWithChildren
-                        value={100}
+                        value={percentage}
                         background
                         backgroundPadding={6}
                         styles={buildStyles({

@@ -10,7 +10,7 @@ import { BASE_URL } from "../assets/constants/urls.js"
 import axios from "axios";
 
 export default function HabitsPage() {
-    const { token, habits, setHabits, loginStatus } = useContext(UserDataContext);
+    const { token, habits, setHabits } = useContext(UserDataContext);
 
     const [form, setForm] = useState({ name: '', days: [] });
     const [newHabit, setNewHabit] = useState(false);
@@ -32,7 +32,7 @@ export default function HabitsPage() {
 
     function addHabit(e) {
         e.preventDefault();
-        if (form.name == "" || form.days.length === 0) {
+        if (form.name === "" || form.days.length === 0) {
             alert("Você precisa escrever o nome da atividade e escolher pelo menos um dia da semana!")
             return;
         }
@@ -251,10 +251,3 @@ const SaveButton = styled.button`
     text-align: center;
     cursor:pointer;
 `
-
-const LoadingContainer = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
