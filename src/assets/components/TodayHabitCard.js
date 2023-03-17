@@ -46,17 +46,17 @@ export default function TodayHabitCard({ id, name, done, currentSequence, highes
                 <HabitName data-test="today-habit-name">{name}</HabitName>
                 <SequenceContainer>
                     <Sequence >Sequência atual:
-                        <SequenceSpan data-test="today-habit-sequence" checked={done}>
+                        <SequenceSpan data-test="today-habit-sequence" check={done}>
                             {` ${sequence.currentSequence} ${sequence.currentSequence !== 1 ? "dias" : "dia"}`}
                         </SequenceSpan>
                     </Sequence>
                     <Sequence data-test="today-habit-record">Seu recorde:
-                        <SequenceSpan checked={currentSequence === sequence.currentSequence ? sequence.currentSequence !== 0 : false}>
+                        <SequenceSpan check={currentSequence === sequence.currentSequence ? sequence.currentSequence !== 0 : false}>
                             {` ${highestSequence} ${highestSequence !== 1 ? "dias" : "dia"}`}</SequenceSpan>
                     </Sequence>
                 </SequenceContainer>
             </CardContainer>
-            <CheckButton data-test="today-habit-check-btn" onClick={() => checkHabit(id, done, doneHabit)} checked={doneHabit}>
+            <CheckButton data-test="today-habit-check-btn" onClick={() => checkHabit(id, done, doneHabit)} check={doneHabit}>
                 <Checkbox 
                     color={done ? "#8FC549" : "#EBEBEB"}
                     height="69px"
@@ -106,7 +106,7 @@ const Sequence = styled.p`
 `
 
 const SequenceSpan = styled.span`
-    color: ${props => props.checked ? "#8FC549" : "#666666"};
+    color: ${props => props.check ? "#8FC549" : "#666666"};
 `
 
 const CheckButton = styled.button`

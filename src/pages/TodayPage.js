@@ -33,7 +33,7 @@ export default function TodayPage() {
                 console.log(err.response.data.message);
             })
 
-    }, [completedHabits])
+    },[completedHabits])
 
 
     return (
@@ -89,5 +89,5 @@ const Today = styled.h1`
 const HabitsStatus = styled.div`
     font-size: 18px;
     line-height: 22px;
-    color:#8FC549;
+    color:${props => props.check ? "#8FC549" : "#666666"};
 `;
