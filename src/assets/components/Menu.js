@@ -5,45 +5,45 @@ import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-pro
 import { Link } from "react-router-dom";
 
 export default function Menu() {
-    const { completedHabits, todayHabits } = useContext(UserDataContext);
+    const { percentage } = useContext(UserDataContext);
 
-    const percentage = Math.floor((completedHabits.length / todayHabits.length) * 100);
 
-    return (
-        <ContainerMenu data-test="menu">
-            <Link to={`/habitos`} data-test="habit-link">
-                <p>
-                    Hábitos
-                </p>
-            </Link>
-            <Link to={`/hoje`} data-test="today-link">
-                <ProgressCircle>
-                    <CircularProgressbarWithChildren
-                        value={percentage}
-                        background
-                        backgroundPadding={6}
-                        styles={buildStyles({
-                            backgroundColor: "#52B6FF",
-                            textColor: "#fff",
-                            pathColor: "#fff",
-                            trailColor: "transparent",
-                            textSize: '18px',
-                            strokeLinecap: "round"
 
-                        })}>
-                        <p>
-                            Hoje
-                        </p>
-                    </CircularProgressbarWithChildren>
-                </ProgressCircle>
-            </Link>
-            <Link to={`/historico`} data-test="history-link">
-                <p>
-                    Histórico
-                </p>
-            </Link>
-        </ContainerMenu>
-    );
+return (
+    <ContainerMenu data-test="menu">
+        <Link to={`/habitos`} data-test="habit-link">
+            <p>
+                Hábitos
+            </p>
+        </Link>
+        <Link to={`/hoje`} data-test="today-link">
+            <ProgressCircle>
+                <CircularProgressbarWithChildren
+                    value={percentage}
+                    background
+                    backgroundPadding={6}
+                    styles={buildStyles({
+                        backgroundColor: "#52B6FF",
+                        textColor: "#fff",
+                        pathColor: "#fff",
+                        trailColor: "transparent",
+                        textSize: '18px',
+                        strokeLinecap: "round"
+
+                    })}>
+                    <p>
+                        Hoje
+                    </p>
+                </CircularProgressbarWithChildren>
+            </ProgressCircle>
+        </Link>
+        <Link to={`/historico`} data-test="history-link">
+            <p>
+                Histórico
+            </p>
+        </Link>
+    </ContainerMenu>
+);
 }
 
 const ContainerMenu = styled.div`

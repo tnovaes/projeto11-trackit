@@ -3,20 +3,21 @@ import { useContext, useState } from "react";
 import { UserDataContext } from "../contexts/userDataContext.js";
 import axios from "axios";
 import { BASE_URL } from "../constants/urls.js"
-import { CheckmarkSharp } from "react-ionicons";
+import { Checkbox } from 'react-ionicons'
 
 export default function TodayHabitCard({ id, name, done, currentSequence, highestSequence }) {
     const { token, completedHabits, setCompletedHabits } = useContext(UserDataContext);
     const [doneHabit, setDoneHabit] = useState(done);
     const [sequence, setSequence] = useState({ done, currentSequence })
 
-    function checkHabit(id, doneHabit) {
+    function checkHabit(id, done) {
+        console.log(id, done);
         const config = {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
         };
-        if (doneHabit === false) {
+        if (done === false) {
             axios.post(`${BASE_URL}/habits/${id}/check`, {}, config)
                 .then(() => {
                     setSequence({ done: true, currentSequence: currentSequence + 1 });
@@ -28,9 +29,9 @@ export default function TodayHabitCard({ id, name, done, currentSequence, highes
                 })
         }
         else {
-            axios.post(`${BASE_URL}/${id}/uncheck`, {}, config)
+            axios.post(`${BASE_URL}/habits/${id}/uncheck`, {}, config)
                 .then(() => {
-                    setSequence({ done: false, currentSequence: currentSequence - 1 });
+                    setSequence({ done: true, currentSequence: currentSequence - 1 });
                     setCompletedHabits(completedHabits.filter(h => h !== id));
                     setDoneHabit(false);
                 })
@@ -44,24 +45,22 @@ export default function TodayHabitCard({ id, name, done, currentSequence, highes
             <CardContainer>
                 <HabitName data-test="today-habit-name">{name}</HabitName>
                 <SequenceContainer>
-                    <Sequence >Sequencia atual:
+                    <Sequence >Sequência atual:
                         <SequenceSpan data-test="today-habit-sequence" checked={done}>
-                            {`${sequence.currentSequence} ${sequence.currentSequence > 1 ? "dias" : "dia"}`}
+                            {` ${sequence.currentSequence} ${sequence.currentSequence !== 1 ? "dias" : "dia"}`}
                         </SequenceSpan>
                     </Sequence>
                     <Sequence data-test="today-habit-record">Seu recorde:
                         <SequenceSpan checked={currentSequence === sequence.currentSequence ? sequence.currentSequence !== 0 : false}>
-                            {`${highestSequence} ${highestSequence > 1 ? "dias" : "dia"}`}</SequenceSpan>
+                            {` ${highestSequence} ${highestSequence !== 1 ? "dias" : "dia"}`}</SequenceSpan>
                     </Sequence>
                 </SequenceContainer>
             </CardContainer>
-            <CheckButton data-test="today-habit-check-btn" onClick={() => checkHabit(id, doneHabit)} checked={doneHabit}>
-                <CheckmarkSharp
-                    color="#FFFFFF"
-                    title="check"
-                    width="40px"
-                    height="40px"
-                />
+            <CheckButton data-test="today-habit-check-btn" onClick={() => checkHabit(id, done, doneHabit)} checked={doneHabit}>
+                <Checkbox 
+                    color={done ? "#8FC549" : "#EBEBEB"}
+                    height="69px"
+                    width="69px" />
             </CheckButton>
         </TodayHabitCardContainer>
     )
@@ -81,36 +80,40 @@ const TodayHabitCardContainer = styled.div`
 `
 
 const CardContainer = styled.div`
-  background-color: white;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+    width:100%;
+    background-color: white;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 `
 
 const HabitName = styled.p`
-  font-size: 20px;
-  line-height: 25px;
+    font-size: 20px;
+    line-height: 25px;
   
 `
 
 const SequenceContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 `
 
 const Sequence = styled.p`
-  font-size: 13px;
-  line-height: 16px;
-`
-
-const CheckButton = styled.div`
-  color: ${props => props.checked ? "#8FC549" : "#EBEBEB"};
-  width: 69px;
-  height: 69px;
+    font-size: 13px;
+    line-height: 16px;
 `
 
 const SequenceSpan = styled.span`
-  color: ${props => props.checked ? "#8FC549" : "#666666"};
+    color: ${props => props.checked ? "#8FC549" : "#666666"};
+`
+
+const CheckButton = styled.button`
+    background-color: transparent;
+    border:none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    
 `

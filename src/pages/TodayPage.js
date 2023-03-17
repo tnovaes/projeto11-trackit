@@ -11,10 +11,10 @@ import TodayHabitCard from "../assets/components/TodayHabitCard";
 
 
 export default function TodayPage() {
-    const { token, completedHabits, todayHabits, setTodayHabits } = useContext(UserDataContext);
+    const { token, completedHabits, todayHabits, setTodayHabits, percentage, setPercentage } = useContext(UserDataContext);
 
     const [completed, setCompleted] = useState([]);
-    const habitsDone = Math.floor((completed.length / todayHabits.length) * 100);
+    
 
     useEffect(() => {
         const config = {
@@ -24,8 +24,10 @@ export default function TodayPage() {
         };
         axios.get(`${BASE_URL}/habits/today`, config)
             .then(res => {
-                setCompleted(res.data.filter((d) => d.done = true))
+                setCompleted(res.data.filter((d) => d.done === true))
                 setTodayHabits(res.data);
+                const habitsDone = Math.floor((res.data.filter((d) => d.done === true).length / todayHabits.length) * 100);
+                setPercentage(habitsDone)
             })
             .catch(err => {
                 console.log(err.response.data.message);
@@ -43,11 +45,11 @@ export default function TodayPage() {
                         {weekdays[dayjs().day()]}, {dayjs().format("DD/MM")}
                     </Today>
                     <HabitsStatus data-test="today-counter" check={completed.length > 0}>
-                        {completed.length > 0 ? `${habitsDone}% dos hábitos concluídos` : "Nenhum hábito concluido ainda"}
+                        {completed.length > 0 ? `${percentage}% dos hábitos concluídos` : "Nenhum hábito concluido ainda"}
                     </HabitsStatus>
                 </DateContainer>
                 <div>
-                    {todayHabits.map((t) => {
+                    {todayHabits.map((t) => 
                         <TodayHabitCard
                             key={t.id}
                             id={t.id}
@@ -56,7 +58,7 @@ export default function TodayPage() {
                             currentSequence={t.currentSequence}
                             highestSequence={t.highestSequence}
                         />
-                    })}
+                    )}
                 </div>
             </ContainerPage>
             <Menu></Menu>
@@ -70,24 +72,18 @@ const ContainerPage = styled.div`
     margin-top: 98px;
     margin-bottom: 110px;
     padding: 0 17px;
-    p{
-        color: #666666;
-        margin-top:28px;
-        font-size: 18px;
-        line-height: 22px;
-    }
 `;
 
 const DateContainer = styled.div`
-  margin-bottom: 28px;
+    margin-bottom: 28px;
 `;
 
 const Today = styled.h1`
-  width: 172px;
-  height: 29px;
-  font-size: 23px;
-  line-height: 29px;
-  color: #126BA5;
+    width: 172px;
+    height: 29px;
+    font-size: 23px;
+    line-height: 29px;
+    color: #126BA5;
 `
 
 const HabitsStatus = styled.div`
